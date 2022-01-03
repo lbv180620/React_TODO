@@ -1,3 +1,5 @@
+// 55. タスクの完了機能
+
 import { useState } from "react";
 import "./styles.css";
 import sha256 from "crypto-js/sha256";
@@ -28,22 +30,26 @@ export const App = () => {
   };
 
   const onClickDeleteBtn = (index) => {
-    const newIncompletedTodoList = [
-      ...deleteFromTodoList(index, incompletedTodoList)
-    ];
-    setIncompletedTodoList(newIncompletedTodoList);
+    alert(generateHash(incompletedTodoList[index]));
+    // const newIncompletedTodoList = [
+    //   ...deleteFromTodoList(index, incompletedTodoList)
+    // ];
+    // setIncompletedTodoList(newIncompletedTodoList);
   };
 
   const onClickCompleteBtn = (index) => {
+    // 未完了リストから対象の項目を削除した新しい未完了リストを生成
     const newIncompletedTodoList = [
       ...deleteFromTodoList(index, incompletedTodoList)
     ];
-
+    // 未完了リストから削除予定の項目を追加した新しい完了リストを生成
     const newCompletedTodoList = [
       ...addToTodoList(incompletedTodoList[index], completedList)
     ];
 
+    // 実際に未完了リストから削除
     setIncompletedTodoList(newIncompletedTodoList);
+    // 実際に完了リストに追加
     setCompletedList(newCompletedTodoList);
   };
 
@@ -82,6 +88,20 @@ export const App = () => {
     return sha256(str);
   };
 
+  const generateRandomString = (
+    num = 8,
+    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  ) => {
+    let result = "";
+    const charsLength = chars.length;
+
+    for (let i = 0; i < num; i++) {
+      result += chars.charAt(Math.floor(Math.random() * charsLength));
+    }
+
+    return result;
+  };
+
   return (
     <>
       <div className="input-area">
@@ -100,6 +120,7 @@ export const App = () => {
               <li key={generateHash(todo)}>
                 <div className="list-row">
                   <p>{todo}</p>
+                  {/* 完了ボタンも行番号の情報が必要になるので、アロー関数で正しく関数を指定 */}
                   <button onClick={() => onClickCompleteBtn(index)}>
                     完了
                   </button>
@@ -128,3 +149,9 @@ export const App = () => {
     </>
   );
 };
+
+/**
+ * オブジェクトでidを持たせると再レンダリングのときにエラーになる。
+ * ユニークなidを持たない場合、どうやってユニークなidを持たせるか？
+ * indexはダメ。
+ */
