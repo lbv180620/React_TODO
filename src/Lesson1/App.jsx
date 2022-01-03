@@ -1,3 +1,5 @@
+// 50. JSXで構造を作成(モック作成)
+
 import "./styles.css";
 
 export const App = () => {
@@ -33,3 +35,7 @@ export const App = () => {
     </>
   );
 };
+
+/**
+ * JSXでは、classではなくclassName
+ */
