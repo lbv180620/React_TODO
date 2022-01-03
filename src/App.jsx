@@ -1,6 +1,13 @@
+// 57. カイゼン(コンポーネント化)
+/**
+ * 今回は、input-area、incompleted-area、completed-areaをコンポーネント分割していく。
+ */
+
 import { useState } from "react";
 import "./styles.css";
 import sha256 from "crypto-js/sha256";
+import { InputTodo } from "./components/InputTodo";
+import { IncompletedTodoList } from "./components/IncompletdTodoList";
 
 export const App = () => {
   //State
@@ -91,32 +98,18 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="TODOを入力"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAddBtn}>追加</button>
-      </div>
-      <div className="incompleted-area">
-        <p className="title">未完了のTODO</p>
-        <ul>
-          {incompletedTodoList.map((todo, index) => {
-            return (
-              <li key={generateHash(todo)}>
-                <div className="list-row">
-                  <p>{todo}</p>
-                  <button onClick={() => onClickCompleteBtn(index)}>
-                    完了
-                  </button>
-                  <button onClick={() => onClickDeleteBtn(index)}>削除</button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {/* InputTodoにpropsで変数、関数を渡す */}
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAddBtn}
+      />
+      <IncompletedTodoList
+        todoList={incompletedTodoList}
+        generateHash={generateHash}
+        onClickCompleteBtn={onClickCompleteBtn}
+        onClickDeleteBtn={onClickDeleteBtn}
+      />
       <div className="completed-area">
         <p className="title">完了したTODO</p>
         <ul>
@@ -135,3 +128,13 @@ export const App = () => {
     </>
   );
 };
+
+/**
+ * JSで開発したときと比べて、Reactで開発すると非常にシンプルになった。
+ * 今回のTODOリストみたいに、画面の要素をガンガン書き換えていくことを考えてみると、
+ * Reactみたいに、データに基づいて画面の要素をレンダリングしていく方がかなりシンプルに
+ * 書けるし、実装者はラク。
+ *
+ * JSみたいにDOMを操作していくのは、しんどい。
+ * 向いてるアプリと不向きなアプリがある。
+ */
