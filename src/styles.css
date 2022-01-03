@@ -1,0 +1,100 @@
+/* 51. CSSでスタイリング */
+
+body {
+  font-family: sans-serif;
+}
+
+/* ⑵共通input */
+input {
+  /* ①雰囲気を合わせるために角を丸くする */
+  border-radius: 16px;
+  /* ②枠線を消す */
+  border: none;
+  /* ③テキスト要素が左側に詰り過ぎなのでpaddingで調整 */
+  padding: 6px 16px;
+  /* ④フォーカスを当てると青い枠線がズレていて邪魔なので消す */
+  outline: none;
+}
+
+/* ⑶共通button */
+button {
+  /* ①inputに合わせて角に丸みを付ける */
+  border-radius: 16px;
+  /* ②inputに合わせて枠を消す */
+  border: none;
+  /* ③要素が内側に詰り過ぎなのでpaddingで調整 */
+  padding: 4px 16px;
+}
+
+button:hover {
+  /* ④フォーカスした時になにも起こらないので、hoverした時に色を付ける */
+  background-color: #ff7fff;
+  /* ⑤文字の色もhoverされた時白くなるようにする */
+  color: #ffffff;
+  /* ⑥hoverした時にマウスをカーソルを変える */
+  cursor: pointer;
+}
+
+/* ⑴input-area */
+.input-area {
+  /* ①スタイルしやすいように背景色を付ける */
+  background-color: #c1ffff;
+  /* ②高さと幅を決める */
+  width: 400px;
+  height: 30px;
+  /* ③要素が左側に寄って接地しているのでpaddingで解消 */
+  padding: 8px;
+  /* ④各areaのマージンが無くなってしまったのでmarginで調整 */
+  margin: 8px;
+  /* ⑤areaに角に丸みを持たせる */
+  border-radius: 8px;
+}
+
+/* ⑴incompleted-area */
+.incompleted-area {
+  background-color: #c6ffe2;
+  width: 400px;
+  /* incompleted-areaとcompleted-areaは高さが可変するので、最小限に高さを指定する */
+  min-height: 200px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+/* ⑴completed-area */
+.completed-area {
+  background-color: #ffffe0;
+  width: 400px;
+  min-height: 200px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+/* ⑷共通title */
+.title {
+  /* ①文字を中央に寄せる */
+  text-align: center; /* text-alignはテキストの横の並びの要素 */
+  /* ②pタグにデフォルトでマージンがされていて、少し空き過ぎているので上のmarginを0にする */
+  margin-top: 0;
+  /* ③タイトルなので太字にする */
+  font-weight: bold;
+  /* ④太字にしたことで少しインパクトが強くなってしまったので、色味を抑えて柔らかい印象にする */
+  color: #666666;
+}
+
+/* ⑸list-row */
+.list-row {
+  /* ①Flex Boxで整列させる */
+  display: flex;
+  /* ②タイトルとボタンで上下の幅がズレている感じがするので、横の中央を揃える */
+  align-items: center;
+  /* ③list-rowを複数並べた時、少し近いのでpaddingで調整 */
+  padding-bottom: 4px;
+}
+
+/* ⑹共通.list-row>p */
+.list-row > p {
+  /* ①タイトルがボタンに近いので、marginで調整 */
+  margin-right: 8px;
+}
