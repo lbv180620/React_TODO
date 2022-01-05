@@ -1,3 +1,14 @@
+// 59. カイゼン(TODOの上限設定)
+/**
+ * 機能追加
+ * 未完了のTODOに5個以上のTODOが追加されたら、それ以上追加できなくする。
+ * そして、TODOを消化しなさいとメッセージが出るようにする。
+ *
+ * InputTodoコンポーネントを使えなくする機能
+ * メッセージを特定の条件のときに出す機能
+ * そのための条件を配列の要素数でハンドリングする。
+ */
+
 import { useState } from "react";
 import "./styles.css";
 import sha256 from "crypto-js/sha256";
